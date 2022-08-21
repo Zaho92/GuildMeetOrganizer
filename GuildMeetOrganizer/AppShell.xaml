@@ -52,7 +52,7 @@
             Route="UsersPage7" />
         <ShellContent
             Title="Benutzer"
-            IsVisible="{Binding IsVisibleForAdmin}"
+            FlyoutItem.IsVisible="{Binding IsVisibleForAdmin}"
             ContentTemplate="{DataTemplate local:UsersPage}"
             Icon="users.png"
             Route="UsersPage8" />

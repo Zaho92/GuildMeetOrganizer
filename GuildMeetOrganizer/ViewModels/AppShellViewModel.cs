@@ -18,17 +18,17 @@ namespace GuildMeetOrganizer.ViewModels
 
         public AppShellViewModel()
         {
-            isVisibleForAdmin = false;
+            IsVisibleForAdmin = false;
             GlobalVariables.LoggedInUserChanged += GlobalVariables_LoggedInUserChanged;
         }
 
         private void GlobalVariables_LoggedInUserChanged()
         {
-            isVisibleForAdmin = false;
+            IsVisibleForAdmin = false;
             RightsTemplate rights = GlobalVariables.LoggedInUser?.FkRightsTemplatesNavigation;
             if (rights!=null)
             {
-                isVisibleForAdmin = rights.IsAdmin;
+                IsVisibleForAdmin = rights.IsAdmin;
             }
         }
 

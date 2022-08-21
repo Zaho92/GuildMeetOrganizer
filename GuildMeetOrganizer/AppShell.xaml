@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="GuildMeetOrganizer.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:GuildMeetOrganizer.Views"
+    xmlns:viewModels="clr-namespace:GuildMeetOrganizer.ViewModels"
+    x:DataType="viewModels:AppShellViewModel"
+    Shell.TabBarIsVisible="False">
+
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate local:LoginPage}"
+        FlyoutItemIsVisible="False"
+        Route="LoginPage" />
+
+    <FlyoutItem Title="Gildentreffen" FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Gildentreffen"
+            ContentTemplate="{DataTemplate local:UsersPage}"
+            Icon="logo.png"
+            Route="UsersPage1" />
+        <ShellContent
+            Title="Einkaufsliste"
+            ContentTemplate="{DataTemplate local:UsersPage}"
+            Icon="shopping.png"
+            Route="UsersPage2" />
+        <ShellContent
+            Title="Events"
+            ContentTemplate="{DataTemplate local:UsersPage}"
+            Icon="event.png"
+            Route="UsersPage3" />
+        <ShellContent
+            Title="Essensplan"
+            ContentTemplate="{DataTemplate local:UsersPage}"
+            Icon="food.png"
+            Route="UsersPage4" />
+        <ShellContent
+            Title="Badezimmerplan"
+            ContentTemplate="{DataTemplate local:UsersPage}"
+            Icon="bath.png"
+            Route="UsersPage5" />
+        <ShellContent
+            Title="Schlafzimmerplan"
+            ContentTemplate="{DataTemplate local:UsersPage}"
+            Icon="sleep.png"
+            Route="UsersPage6" />
+        <ShellContent
+            Title="Einstellungen"
+            ContentTemplate="{DataTemplate local:UsersPage}"
+            Icon="settings.png"
+            Route="UsersPage7" />
+        <ShellContent
+            Title="Benutzer"
+            ContentTemplate="{DataTemplate local:UsersPage}"
+            Icon="users.png"
+            Route="UsersPage" />
+    </FlyoutItem>
+
+    <Shell.FlyoutFooter>
+        <Grid ColumnDefinitions="Auto,*" HeightRequest="50">
+            <ImageButton
+                Grid.Column="0"
+                Command="{Binding LogoutUserCommand}"
+                HeightRequest="24"
+                Source="logout.png" />
+            <Button
+                Grid.Column="1"
+                Background="Transparent"
+                BorderColor="Transparent"
+                Command="{Binding LogoutUserCommand}"
+                HorizontalOptions="Start"
+                Text="Abmelden" />
+        </Grid>
+    </Shell.FlyoutFooter>
+
+</Shell>

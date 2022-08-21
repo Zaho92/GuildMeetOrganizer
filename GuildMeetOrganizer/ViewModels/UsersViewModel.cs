@@ -27,8 +27,8 @@ namespace GuildMeetOrganizer.ViewModels
         public void LoadUsers()
         {
             UserListIsRefreshing = true;
-            UserDataController dc = new UserDataController();
-            var response = dc.GetUsers();
+            UserDataController userData = new UserDataController();
+            var response = userData.GetUsers();
             if (!response.HasError)
             {
                 Users = response.ResponseObject;
@@ -39,6 +39,25 @@ namespace GuildMeetOrganizer.ViewModels
                 Users = new List<User>();
             }
             UserListIsRefreshing = false;
+        }
+
+        [RelayCommand]
+        public void AddUser()
+        {
+            //Navigate to Add Page
+        }
+
+        [RelayCommand]
+        public void EditUser(User selectedUser)
+        {
+            //Navigate to Edit Page
+        }
+
+        [RelayCommand]
+        public void DeleteUser(User selectedUser)
+        {
+            //Delete User
+            LoadUsers();        
         }
     }
 }

@@ -9,6 +9,22 @@ namespace GuildMeetOrganizer.Helpers
 {
     internal static class GlobalVariables
     {
-        public static User LoggedInUser { get; set; }
+        public delegate void LoggedInUserChangedHandler();
+        public static event LoggedInUserChangedHandler LoggedInUserChanged;
+        private static User _loggedInUser;
+        public static User LoggedInUser {
+            get
+            {
+                return _loggedInUser;
+            } 
+            set
+            {
+                if (_loggedInUser != value)
+                {
+                    _loggedInUser = value;
+                    LoggedInUserChanged?.Invoke();
+                }
+            }
+        }
     }
 }

@@ -40,6 +40,18 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\logo.svg" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\add.svg" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\add_user.svg" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\bath.svg" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\delete.svg" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\edit.svg" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\event.svg" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\food.svg" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\logout.svg" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\settings.svg" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\shopping.svg" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\sleep.svg" BaseSize="128,128" />
+		<MauiImage Update="Resources\Images\users.svg" BaseSize="128,128" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -52,7 +64,11 @@
 	  <None Remove="Resources\Fonts\Roboto-Medium.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-Thin.ttf" />
+	  <None Remove="Resources\Images\add.svg" />
+	  <None Remove="Resources\Images\add_user.svg" />
 	  <None Remove="Resources\Images\bath.svg" />
+	  <None Remove="Resources\Images\delete.svg" />
+	  <None Remove="Resources\Images\edit.svg" />
 	  <None Remove="Resources\Images\event.svg" />
 	  <None Remove="Resources\Images\food.svg" />
 	  <None Remove="Resources\Images\logo.svg" />

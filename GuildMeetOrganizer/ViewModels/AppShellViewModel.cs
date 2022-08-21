@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GuildMeetOrganizer.Helpers;
+using GuildMeetOrganizer.Models;
 using GuildMeetOrganizer.Views;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,27 @@ using System.Threading.Tasks;
 
 namespace GuildMeetOrganizer.ViewModels
 {
-    public partial class AppShellViewModel:ObservableObject
+    public partial class AppShellViewModel : ObservableObject
     {
+        [ObservableProperty]
+        public bool isVisibleForAdmin;
+
+        public AppShellViewModel()
+        {
+            isVisibleForAdmin = false;
+            GlobalVariables.LoggedInUserChanged += GlobalVariables_LoggedInUserChanged;
+        }
+
+        private void GlobalVariables_LoggedInUserChanged()
+        {
+            isVisibleForAdmin = false;
+            RightsTemplate rights = GlobalVariables.LoggedInUser?.FkRightsTemplatesNavigation;
+            if (rights!=null)
+            {
+                isVisibleForAdmin = rights.IsAdmin;
+            }
+        }
+
         [RelayCommand]
         public async void LogoutUser()
         {

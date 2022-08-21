@@ -19,7 +19,7 @@
             Title="Gildentreffen"
             ContentTemplate="{DataTemplate local:UsersPage}"
             Icon="logo.png"
-            Route="UsersPage1" />
+            Route="UsersPage" />
         <ShellContent
             Title="Einkaufsliste"
             ContentTemplate="{DataTemplate local:UsersPage}"
@@ -52,9 +52,10 @@
             Route="UsersPage7" />
         <ShellContent
             Title="Benutzer"
+            IsVisible="{Binding IsVisibleForAdmin}"
             ContentTemplate="{DataTemplate local:UsersPage}"
             Icon="users.png"
-            Route="UsersPage" />
+            Route="UsersPage8" />
     </FlyoutItem>
 
     <Shell.FlyoutFooter>

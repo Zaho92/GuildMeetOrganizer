@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:GuildMeetOrganizer.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:GuildMeetOrganizer.ViewModels"
     Title="{Binding PageName}"
     x:DataType="viewModels:UsersViewModel">
@@ -20,16 +21,6 @@
                 <DataTemplate>
                     <ViewCell>
                         <SwipeView>
-                            <SwipeView.LeftItems>
-                                <SwipeItems>
-                                    <SwipeItem
-                                        BackgroundColor="{StaticResource Accent1}"
-                                        Command="{Binding EditUserCommand, Source={RelativeSource AncestorType={x:Type viewModels:UsersViewModel}}}"
-                                        CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}"
-                                        IconImageSource="edit.png"
-                                        Text="Bearbeiten" />
-                                </SwipeItems>
-                            </SwipeView.LeftItems>
                             <SwipeView.RightItems>
                                 <SwipeItems>
                                     <SwipeItem
@@ -45,6 +36,12 @@
                                 ColumnDefinitions="Auto,*"
                                 HeightRequest="70"
                                 RowDefinitions="*,Auto">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding ShowUserCommand, Source={RelativeSource AncestorType={x:Type viewModels:UsersViewModel}}}"
+                                        CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}"
+                                        NumberOfTapsRequired="2" />
+                                </Grid.GestureRecognizers>
                                 <Label
                                     Grid.Column="0"
                                     FontAttributes="Bold"
@@ -71,8 +68,6 @@
         <Button
             Command="{Binding AddUserCommand}"
             Text="Neuen Benutzer anlegen"
-            HeightRequest="50"
-            FontSize="18"
             VerticalOptions="End" />
     </Grid>
 </ContentPage>

@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GuildMeetOrganizer.Controller;
 using GuildMeetOrganizer.Models;
+using GuildMeetOrganizer.Views;
 
 namespace GuildMeetOrganizer.ViewModels
 {
@@ -48,9 +49,13 @@ namespace GuildMeetOrganizer.ViewModels
         }
 
         [RelayCommand]
-        public void EditUser(User selectedUser)
+        public async void ShowUser(User selectedUser)
         {
-            //Navigate to Edit Page
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "user", selectedUser }
+            };
+            await Shell.Current.GoToAsync(nameof(MangeUserPage), navigationParameter);
         }
 
         [RelayCommand]

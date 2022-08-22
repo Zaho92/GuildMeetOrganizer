@@ -14,6 +14,7 @@
         FlyoutItemIsVisible="False"
         Route="LoginPage" />
 
+
     <FlyoutItem Title="Gildentreffen" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             Title="Gildentreffen"
@@ -52,27 +53,29 @@
             Route="UsersPage7" />
         <ShellContent
             Title="Benutzer"
-            FlyoutItem.IsVisible="{Binding IsVisibleForAdmin}"
             ContentTemplate="{DataTemplate local:UsersPage}"
+            FlyoutItem.IsVisible="{Binding IsVisibleForAdmin}"
             Icon="users.png"
             Route="UsersPage8" />
     </FlyoutItem>
 
+    <Shell.FlyoutHeader>
+        <Label
+            Margin="12"
+            FontSize="24"
+            HorizontalTextAlignment="Center"
+            Text="{Binding UserGreetingString}"
+            TextColor="{StaticResource Accent1}" />
+    </Shell.FlyoutHeader>
+
     <Shell.FlyoutFooter>
-        <Grid ColumnDefinitions="Auto,*" HeightRequest="50">
-            <ImageButton
-                Grid.Column="0"
-                Command="{Binding LogoutUserCommand}"
-                HeightRequest="24"
-                Source="logout.png" />
-            <Button
-                Grid.Column="1"
-                Background="Transparent"
-                BorderColor="Transparent"
-                Command="{Binding LogoutUserCommand}"
-                HorizontalOptions="Start"
-                Text="Abmelden" />
-        </Grid>
+        <Button
+            Grid.Column="1"
+            Margin="12"
+            Command="{Binding LogoutUserCommand}"
+            FontSize="18"
+            HorizontalOptions="Center"
+            Text="Abmelden" />
     </Shell.FlyoutFooter>
 
 </Shell>

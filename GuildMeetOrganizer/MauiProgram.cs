@@ -1,4 +1,5 @@
-﻿using GuildMeetOrganizer.ViewModels;
+﻿using CommunityToolkit.Maui;
+using GuildMeetOrganizer.ViewModels;
 using GuildMeetOrganizer.Views;
 
 namespace GuildMeetOrganizer;
@@ -17,13 +18,18 @@ public static class MauiProgram
                 fonts.AddFont("Roboto-Thin.ttf", "RobotoThin");
             });
 
-		builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
+        builder.UseMauiApp<App>().UseMauiCommunityToolkit();
+
+        builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
+
+        builder.Services.AddSingleton<LoginViewModel>();
+        builder.Services.AddSingleton<LoginPage>();
 
         builder.Services.AddSingleton<UsersViewModel>();
 		builder.Services.AddSingleton<UsersPage>();
 
-        builder.Services.AddSingleton<LoginViewModel>();
-        builder.Services.AddSingleton<LoginPage>();
+        builder.Services.AddTransient<ManageUserViewModel>();
+		builder.Services.AddTransient<MangeUserPage>();
 
 		var app = builder.Build();
 

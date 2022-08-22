@@ -14,22 +14,43 @@ namespace GuildMeetOrganizer.ViewModels
     public partial class AppShellViewModel : ObservableObject
     {
         [ObservableProperty]
-        public bool isVisibleForAdmin;
+        public bool _isVisibleForAdmin;
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(UserGreetingString))]
+        public string _loggedInUsername;
+
+        public string UserGreetingString => GetRandomGreeting() + LoggedInUsername;
 
         public AppShellViewModel()
         {
             IsVisibleForAdmin = false;
             GlobalVariables.LoggedInUserChanged += GlobalVariables_LoggedInUserChanged;
         }
-
+        
         private void GlobalVariables_LoggedInUserChanged()
         {
             IsVisibleForAdmin = false;
+            LoggedInUsername = GlobalVariables.LoggedInUser?.Username;
             RightsTemplate rights = GlobalVariables.LoggedInUser?.FkRightsTemplatesNavigation;
             if (rights!=null)
             {
                 IsVisibleForAdmin = rights.IsAdmin;
             }
+        }
+
+        private string GetRandomGreeting()
+        {
+            var random = new Random();
+            List<string> greetings = new List<string>()
+            {
+                "Moin",
+                "Hallo",
+                "Hi",
+                "Tach",
+                "Moinsen",
+                "Hola",                
+            };
+            return greetings[random.Next(0, greetings.Count)] + " ";
         }
 
         [RelayCommand]

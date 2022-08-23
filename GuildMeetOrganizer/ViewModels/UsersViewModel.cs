@@ -17,35 +17,39 @@ namespace GuildMeetOrganizer.ViewModels
         public List<User> _users;
         [ObservableProperty]
         public bool _userListIsRefreshing;
+        [ObservableProperty]
+        public bool _hasError;
+        [ObservableProperty]
+        public string _errorMessage;
 
         public UsersViewModel()
         {
             PageName = "Benutzer";
-            LoadUsers();
         }
 
         [RelayCommand]
-        public void LoadUsers()
+        public async void LoadUsers()
         {
+            HasError = false;
             UserListIsRefreshing = true;
-            UserDataController userData = new UserDataController();
-            var response = userData.GetUsers();
-            if (!response.HasError)
+            var response = await new UserDataController().GetUsersAsync();
+            if (response == null || response.HasError)
             {
-                Users = response.ResponseObject;
+                HasError = true;
+                ErrorMessage = "Fehler beim laden der Benutzer";
+                Users = new List<User>();
             }
             else
             {
-                // Error werden noch nicht angezeigt
-                Users = new List<User>();
+                Users = response.Response;
             }
             UserListIsRefreshing = false;
         }
 
         [RelayCommand]
-        public void AddUser()
+        public async void AddUser()
         {
-            //Navigate to Add Page
+            await Shell.Current.GoToAsync(nameof(MangeUserPage));
         }
 
         [RelayCommand]
@@ -59,10 +63,19 @@ namespace GuildMeetOrganizer.ViewModels
         }
 
         [RelayCommand]
-        public void DeleteUser(User selectedUser)
+        public async void DeleteUser(User selectedUser)
         {
-            //Delete User
-            LoadUsers();        
+            var response = await new UserDataController().DeleteUserAsync(selectedUser.IdUser);
+            if (response == null || response.HasError || response.Response == false)
+            {
+                HasError = true;
+                ErrorMessage = "Fehler beim löschen des Benutzers " + selectedUser.Username;
+                return;
+            }
+            else
+            {
+                LoadUsers();        
+            }
         }
     }
 }

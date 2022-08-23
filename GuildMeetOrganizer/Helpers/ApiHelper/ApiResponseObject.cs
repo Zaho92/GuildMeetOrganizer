@@ -10,7 +10,7 @@ namespace GuildMeetOrganizer.Models.ApiHelper
 {
     internal class ApiResponseObject<T>
     {
-        public T ResponseObject;
+        public T Response;
         public bool HasError => !String.IsNullOrWhiteSpace(ErrorMessage);
         public string ErrorMessage;
         public HttpStatusCode StatusCode { get; set; }
@@ -26,7 +26,7 @@ namespace GuildMeetOrganizer.Models.ApiHelper
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                     WriteIndented = true
                 };
-                ResponseObject = JsonSerializer.Deserialize<T>(content, serializerOptions);
+                Response = JsonSerializer.Deserialize<T>(content, serializerOptions);
             }
             else
             {

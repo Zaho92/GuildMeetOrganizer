@@ -11,7 +11,8 @@ namespace GuildMeetOrganizer.Models.ApiHelper
         public const string ApiBaseUrl = @"https://www.altrogge.online:10010";
         public enum ApiControllers
         {
-            User
+            User,
+            RightsTemplates
         }
 
         public static string GetBaseApiPath(ApiControllers forController)

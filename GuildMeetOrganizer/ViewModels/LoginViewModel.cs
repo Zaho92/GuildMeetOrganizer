@@ -58,7 +58,7 @@ namespace GuildMeetOrganizer.ViewModels
             }
             else
             {
-                GlobalVariables.LoggedInUser = response.ResponseObject;
+                GlobalVariables.LoggedInUser = response.Response;
             }
 
             await Shell.Current.GoToAsync($"//{nameof(UsersPage)}");

@@ -37,6 +37,8 @@
     <Color x:Key="Accent1">#fc7044</Color>
     <Color x:Key="Accent2">#24bba2</Color>
     <Color x:Key="Accent3">#9d4bfe</Color>
+    <Color x:Key="AcceptColor">#4C956C</Color>
+    <Color x:Key="AbortColor">#A40E4C</Color>
 
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource Background}" />
     <SolidColorBrush x:Key="HiglightedBackgroundBrush" Color="{StaticResource HiglightedBackground}" />
@@ -47,5 +49,7 @@
     <SolidColorBrush x:Key="Accent1Brush" Color="{StaticResource Accent1}" />
     <SolidColorBrush x:Key="Accent2Brush" Color="{StaticResource Accent2}" />
     <SolidColorBrush x:Key="Accent3Brush" Color="{StaticResource Accent3}" />
+    <SolidColorBrush x:Key="AcceptColorBrush" Color="{StaticResource AcceptColor}" />
+    <SolidColorBrush x:Key="AbortColorBrush" Color="{StaticResource AbortColor}" />
 
 </ResourceDictionary>

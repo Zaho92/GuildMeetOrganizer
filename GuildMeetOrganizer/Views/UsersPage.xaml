@@ -7,65 +7,76 @@
     xmlns:viewModels="clr-namespace:GuildMeetOrganizer.ViewModels"
     Title="{Binding PageName}"
     x:DataType="viewModels:UsersViewModel">
-    <Grid Margin="15">
-        <ListView
-            IsPullToRefreshEnabled="True"
-            IsRefreshing="{Binding UserListIsRefreshing}"
-            ItemsSource="{Binding Users}"
-            RefreshCommand="{Binding LoadUsersCommand}"
-            RowHeight="70"
-            SelectionMode="None"
-            SeparatorVisibility="Default"
-            VerticalOptions="FillAndExpand">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <SwipeView>
-                            <SwipeView.RightItems>
-                                <SwipeItems>
-                                    <SwipeItem
-                                        BackgroundColor="Red"
-                                        Command="{Binding DeleteUserCommand, Source={RelativeSource AncestorType={x:Type viewModels:UsersViewModel}}}"
-                                        CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}"
-                                        IconImageSource="delete.png"
-                                        Text="Entfernen" />
-                                </SwipeItems>
-                            </SwipeView.RightItems>
-                            <Grid
-                                x:DataType="models:User"
-                                ColumnDefinitions="Auto,*"
-                                HeightRequest="70"
-                                RowDefinitions="*,Auto">
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                        Command="{Binding ShowUserCommand, Source={RelativeSource AncestorType={x:Type viewModels:UsersViewModel}}}"
-                                        CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}"
-                                        NumberOfTapsRequired="2" />
-                                </Grid.GestureRecognizers>
-                                <Label
-                                    Grid.Column="0"
-                                    FontAttributes="Bold"
-                                    FontSize="24"
-                                    Text="{Binding Username}"
-                                    VerticalOptions="Center" />
-                                <Label
-                                    Grid.Column="1"
-                                    Margin="6,0"
-                                    HorizontalOptions="End"
-                                    Text="{Binding FkRightsTemplatesNavigation.Description, FallbackValue='Kein Template vergeben'}"
-                                    VerticalOptions="CenterAndExpand" />
-                                <Label
-                                    Grid.Row="1"
-                                    Grid.ColumnSpan="1"
-                                    FontAttributes="Italic"
-                                    Text="{Binding FullDisplayName}" />
-                            </Grid>
-                        </SwipeView>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding LoadUsersCommand}" EventName="NavigatedTo" />
+    </ContentPage.Behaviors>
+    <Grid Margin="15" RowDefinitions="Auto,*,Auto">
+        <Label
+            Grid.Row="0"
+            HorizontalOptions="Center"
+            IsVisible="{Binding HasError}"
+            Text="{Binding ErrorMessage}"
+            TextColor="{StaticResource AbortColor}" />
+        <ScrollView Grid.Row="1" VerticalOptions="FillAndExpand">
+            <ListView
+                IsPullToRefreshEnabled="True"
+                IsRefreshing="{Binding UserListIsRefreshing}"
+                ItemsSource="{Binding Users}"
+                RefreshCommand="{Binding LoadUsersCommand}"
+                RowHeight="70"
+                SelectionMode="None"
+                SeparatorVisibility="Default">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem
+                                            BackgroundColor="{StaticResource AbortColor}"
+                                            Command="{Binding DeleteUserCommand, Source={RelativeSource AncestorType={x:Type viewModels:UsersViewModel}}}"
+                                            CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}"
+                                            IconImageSource="delete.png"
+                                            Text="Entfernen" />
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <Grid
+                                    x:DataType="models:User"
+                                    ColumnDefinitions="Auto,*"
+                                    HeightRequest="70"
+                                    RowDefinitions="*,Auto">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding ShowUserCommand, Source={RelativeSource AncestorType={x:Type viewModels:UsersViewModel}}}"
+                                            CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}"
+                                            NumberOfTapsRequired="2" />
+                                    </Grid.GestureRecognizers>
+                                    <Label
+                                        Grid.Column="0"
+                                        FontAttributes="Bold"
+                                        FontSize="24"
+                                        Text="{Binding Username}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="1"
+                                        Margin="6,0"
+                                        HorizontalOptions="End"
+                                        Text="{Binding FkRightsTemplatesNavigation.Description, FallbackValue='Kein Template vergeben'}"
+                                        VerticalOptions="CenterAndExpand" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.ColumnSpan="1"
+                                        FontAttributes="Italic"
+                                        Text="{Binding FullDisplayName}" />
+                                </Grid>
+                            </SwipeView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
         <Button
+            Grid.Row="2"
             Command="{Binding AddUserCommand}"
             Text="Neuen Benutzer anlegen"
             VerticalOptions="End" />

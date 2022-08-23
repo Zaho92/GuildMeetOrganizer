@@ -11,6 +11,7 @@ namespace GuildMeetOrganizer.Models
     {
         public int IdUser { get; set; }
         public string Username { get; set; }
+        public string Password { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string Phonenumber { get; set; }
@@ -18,5 +19,19 @@ namespace GuildMeetOrganizer.Models
         public string FullDisplayName => $"{Firstname} {Lastname}";
 
         public virtual RightsTemplate FkRightsTemplatesNavigation { get; set; }
+
+        internal User GetCopy()
+        {
+            return new User()
+            {
+                IdUser = IdUser,
+                Username = Username,
+                Password = Password,
+                Firstname = Firstname,
+                Lastname = Lastname,
+                Phonenumber = Phonenumber,
+                FkRightsTemplatesNavigation = FkRightsTemplatesNavigation == null ? null : FkRightsTemplatesNavigation.GetCopy(),
+            };
+        }
     }
 }

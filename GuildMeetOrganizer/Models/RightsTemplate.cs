@@ -12,5 +12,16 @@ namespace GuildMeetOrganizer.Models
         public string Description { get; set; }
         public bool IsAdmin { get; set; }
         public bool IsInitialUser { get; set; }
+
+        internal RightsTemplate GetCopy()
+        {
+            return new RightsTemplate()
+            {
+                IdRightsTemplate = IdRightsTemplate,
+                Description = Description,
+                IsAdmin = IsAdmin,
+                IsInitialUser = IsInitialUser
+            };
+        }
     }
 }

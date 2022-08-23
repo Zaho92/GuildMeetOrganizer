@@ -83,7 +83,7 @@
         <Setter Property="TextColor" Value="{StaticResource Text}" />
         <Setter Property="BackgroundColor" Value="{StaticResource Foreground}" />
         <Setter Property="FontFamily" Value="RobotoRegular" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontSize" Value="22" />
         <Setter Property="PlaceholderColor" Value="{StaticResource DisabledText}" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
@@ -103,7 +103,7 @@
         <Setter Property="TextColor" Value="{StaticResource Text}" />
         <Setter Property="BackgroundColor" Value="{StaticResource Foreground}" />
         <Setter Property="FontFamily" Value="RobotoRegular" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontSize" Value="22" />
         <Setter Property="PlaceholderColor" Value="{StaticResource DisabledText}" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
@@ -162,6 +162,12 @@
         </Setter>
     </Style>
 
+    <Style TargetType="Label" x:Key="EntryHeaderLabel">
+        <Setter Property="TextColor" Value="{StaticResource Accent1}" />
+        <Setter Property="FontFamily" Value="RobotoRegular" />
+        <Setter Property="FontSize" Value="22" />       
+    </Style>
+
     <Style TargetType="ListView">
         <Setter Property="SeparatorColor" Value="{StaticResource Accent1}" />
         <Setter Property="RefreshControlColor" Value="{StaticResource Accent1}" />
@@ -169,10 +175,12 @@
 
     <Style TargetType="Picker">
         <Setter Property="TextColor" Value="{StaticResource Text}" />
-        <Setter Property="TitleColor" Value="{StaticResource Text}" />
+        <Setter Property="TitleColor" Value="{StaticResource Accent1}" />
+        <Setter Property="CompressedLayout.IsHeadless" Value="True"></Setter>
         <Setter Property="BackgroundColor" Value="{StaticResource Foreground}" />
+        <Setter Property="Background" Value="{StaticResource Foreground}" />
         <Setter Property="FontFamily" Value="RobotoRegular" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontSize" Value="22" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">

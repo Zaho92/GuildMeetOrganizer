@@ -15,6 +15,10 @@ namespace GuildMeetOrganizer.Models.ApiHelper
         public string ErrorMessage;
         public HttpStatusCode StatusCode { get; set; }
 
+        public ApiResponseObject()
+        {
+        }
+
         public ApiResponseObject(HttpResponseMessage responseMessage)
         {
             StatusCode = responseMessage.StatusCode;
@@ -33,5 +37,6 @@ namespace GuildMeetOrganizer.Models.ApiHelper
                 ErrorMessage = responseMessage.Content.ReadAsStringAsync().Result;
             }
         }
+
     }
 }

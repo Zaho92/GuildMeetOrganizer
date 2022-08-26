@@ -11,108 +11,116 @@
     <ContentPage.Resources>
         <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
     </ContentPage.Resources>
-    <ScrollView>
-        <Grid Margin="15" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,*,Auto">
-            <Label
-                Grid.Row="0"
-                Style="{StaticResource EntryHeaderLabel}"
-                Text="Benutzername" />
-            <Entry
-                Grid.Row="1"
-                Margin="0,0,0,15"
-                IsEnabled="{Binding InEditMode}"
-                Placeholder="Benutzername..."
-                Text="{Binding ThisUser.Username}" />
-            <Label
-                Grid.Row="2"
-                IsVisible="{Binding IsNewUser}"
-                Style="{StaticResource EntryHeaderLabel}"
-                Text="Passwort" />
-            <Entry
-                Grid.Row="3"
-                Margin="0,0,0,15"
-                IsEnabled="{Binding InEditMode}"
-                IsPassword="True"
-                IsVisible="{Binding IsNewUser}"
-                Placeholder="Passwort..."
-                Text="{Binding ThisUser.Password}" />
-            <Label
-                Grid.Row="4"
-                IsVisible="{Binding IsNewUser}"
-                Style="{StaticResource EntryHeaderLabel}"
-                Text="Passwort bestätigen" />
-            <Entry
-                Grid.Row="5"
-                Margin="0,0,0,15"
-                IsEnabled="{Binding InEditMode}"
-                IsPassword="True"
-                IsVisible="{Binding IsNewUser}"
-                Placeholder="Passwort bestätigen..."
-                Text="{Binding CheckPassword}" />
-            <Label
-                Grid.Row="6"
-                Style="{StaticResource EntryHeaderLabel}"
-                Text="Vorname" />
-            <Entry
-                Grid.Row="7"
-                Margin="0,0,0,15"
-                IsEnabled="{Binding InEditMode}"
-                Placeholder="Vorname..."
-                Text="{Binding ThisUser.Firstname}" />
-            <Label
-                Grid.Row="8"
-                Style="{StaticResource EntryHeaderLabel}"
-                Text="Nachname" />
-            <Entry
-                Grid.Row="9"
-                Margin="0,0,0,15"
-                IsEnabled="{Binding InEditMode}"
-                Placeholder="Nachname..."
-                Text="{Binding ThisUser.Lastname}" />
-            <Label
-                Grid.Row="10"
-                Style="{StaticResource EntryHeaderLabel}"
-                Text="Telefonnummer" />
-            <Entry
-                Grid.Row="11"
-                Margin="0,0,0,15"
-                IsEnabled="{Binding InEditMode}"
-                Placeholder="Telefonnummer..."
-                Text="{Binding ThisUser.Phonenumber}" />
-            <Label
-                Grid.Row="12"
-                Style="{StaticResource EntryHeaderLabel}"
-                Text="Berechtigung" />
-            <Picker
-                Title="Berechtigung wählen"
-                Grid.Row="13"
-                Margin="0,0,0,15"
-                IsEnabled="{Binding CanTemplateBeChanged}"
-                ItemDisplayBinding="{Binding Description}"
-                ItemsSource="{Binding RightsTemplates}"
-                SelectedItem="{Binding SelectedTemplate}" />
-
-            <Button
-                Grid.Row="15"
-                Command="{Binding ActivateEditModeCommand}"
-                IsVisible="{Binding InEditMode, Converter={StaticResource Key=InvertedBoolConverter}}"
-                Text="Editieren" />
-            <Grid
-                Grid.Row="15"
-                ColumnDefinitions="*,*"
-                ColumnSpacing="15"
-                IsVisible="{Binding InEditMode}">
-                <Button
-                    Grid.Column="0"
-                    BackgroundColor="{StaticResource AcceptColor}"
-                    Command="{Binding SaveUserCommand}"
-                    Text="Speichern" />
-                <Button
-                    Grid.Column="1"
-                    BackgroundColor="{StaticResource AbortColor}"
-                    Command="{Binding DeactivateEditModeCommand}"
-                    Text="Abbrechen" />
+    <Grid RowDefinitions="*,Auto" Margin="15">
+        <ActivityIndicator
+            Grid.RowSpan="2"
+            IsRunning="{Binding IsBusy}"
+            WidthRequest="100"
+            ZIndex="10" />
+        <ScrollView Grid.Row="0">
+            <Grid  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                <Label
+                    Grid.Row="0"
+                    Style="{StaticResource EntryHeaderLabel}"
+                    Text="Benutzername" />
+                <Entry
+                    Grid.Row="1"
+                    Margin="0,0,0,15"
+                    IsEnabled="{Binding InEditMode}"
+                    Placeholder="Benutzername..."
+                    Text="{Binding ThisUser.Username}" />
+                <Label
+                    Grid.Row="2"
+                    IsVisible="{Binding IsNewUser}"
+                    Style="{StaticResource EntryHeaderLabel}"
+                    Text="Passwort" />
+                <Entry
+                    Grid.Row="3"
+                    Margin="0,0,0,15"
+                    IsEnabled="{Binding InEditMode}"
+                    IsPassword="True"
+                    IsVisible="{Binding IsNewUser}"
+                    Placeholder="Passwort..."
+                    Text="{Binding ThisUser.Password}" />
+                <Label
+                    Grid.Row="4"
+                    IsVisible="{Binding IsNewUser}"
+                    Style="{StaticResource EntryHeaderLabel}"
+                    Text="Passwort bestätigen" />
+                <Entry
+                    Grid.Row="5"
+                    Margin="0,0,0,15"
+                    IsEnabled="{Binding InEditMode}"
+                    IsPassword="True"
+                    IsVisible="{Binding IsNewUser}"
+                    Placeholder="Passwort bestätigen..."
+                    Text="{Binding CheckPassword}" />
+                <Label
+                    Grid.Row="6"
+                    Style="{StaticResource EntryHeaderLabel}"
+                    Text="Vorname" />
+                <Entry
+                    Grid.Row="7"
+                    Margin="0,0,0,15"
+                    IsEnabled="{Binding InEditMode}"
+                    Placeholder="Vorname..."
+                    Text="{Binding ThisUser.Firstname}" />
+                <Label
+                    Grid.Row="8"
+                    Style="{StaticResource EntryHeaderLabel}"
+                    Text="Nachname" />
+                <Entry
+                    Grid.Row="9"
+                    Margin="0,0,0,15"
+                    IsEnabled="{Binding InEditMode}"
+                    Placeholder="Nachname..."
+                    Text="{Binding ThisUser.Lastname}" />
+                <Label
+                    Grid.Row="10"
+                    Style="{StaticResource EntryHeaderLabel}"
+                    Text="Telefonnummer" />
+                <Entry
+                    Grid.Row="11"
+                    Margin="0,0,0,15"
+                    IsEnabled="{Binding InEditMode}"
+                    Placeholder="Telefonnummer..."
+                    Text="{Binding ThisUser.Phonenumber}" />
+                <Label
+                    Grid.Row="12"
+                    Style="{StaticResource EntryHeaderLabel}"
+                    Text="Berechtigung" />
+                <Picker
+                    Title="Berechtigung wählen"
+                    Grid.Row="13"
+                    Margin="0,0,0,15"
+                    IsEnabled="{Binding CanTemplateBeChanged}"
+                    ItemDisplayBinding="{Binding Description}"
+                    ItemsSource="{Binding RightsTemplates}"
+                    SelectedItem="{Binding SelectedTemplate}" />
             </Grid>
+        </ScrollView>
+        <Button
+            Grid.Row="1"
+            Margin="0,15"
+            Command="{Binding ActivateEditModeCommand}"
+            IsVisible="{Binding InEditMode, Converter={StaticResource Key=InvertedBoolConverter}}"
+            Text="Editieren" />
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="*,*"
+            Margin="0,15"
+            ColumnSpacing="15"
+            IsVisible="{Binding InEditMode}">
+            <Button
+                Grid.Column="0"
+                BackgroundColor="{StaticResource AcceptColor}"
+                Command="{Binding SaveUserCommand}"
+                Text="Speichern" />
+            <Button
+                Grid.Column="1"
+                BackgroundColor="{StaticResource AbortColor}"
+                Command="{Binding DeactivateEditModeCommand}"
+                Text="Abbrechen" />
         </Grid>
-    </ScrollView>
+    </Grid>
 </ContentPage>

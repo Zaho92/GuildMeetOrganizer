@@ -3,6 +3,8 @@ using GuildMeetOrganizer.Models;
 using GuildMeetOrganizer.Models.ApiHelper;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Net.Http.Headers;
+using System.Net.Http;
 using System.Text;
 using static GuildMeetOrganizer.Models.ApiHelper.ApiUriBuilder;
 
@@ -12,11 +14,10 @@ namespace GuildMeetOrganizer.Controller
     {
         readonly HttpClient _client;
         readonly ApiControllers thisApiController = ApiControllers.RightsTemplates;
-
         public RightsTemplateDataController()
         {
             _client = new HttpClient();
-
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GlobalVariables.ApiToken);
         }
 
         const string GetRightsTemplatesUrl = "GetRightsTemplates";

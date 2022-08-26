@@ -13,6 +13,8 @@ namespace GuildMeetOrganizer.ViewModels
         [NotifyPropertyChangedFor(nameof(CanTemplateBeChanged))]
         public bool _inEditMode;
         [ObservableProperty]
+        public bool _isBusy;
+        [ObservableProperty]
         public bool _isNewUser;
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(SelectedTemplate))]
@@ -49,6 +51,7 @@ namespace GuildMeetOrganizer.ViewModels
 
         private async void GetRightsTemplates()
         {
+            IsBusy = true;
             var response = await new RightsTemplateDataController().GetRightsTemplatesAsync();
             if (response != null && !response.HasError)
             {
@@ -67,6 +70,7 @@ namespace GuildMeetOrganizer.ViewModels
             {
                 RightsTemplates = new List<RightsTemplate>();
             }
+            IsBusy = false;
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -87,14 +91,17 @@ namespace GuildMeetOrganizer.ViewModels
         [RelayCommand]
         public void ActivateEditMode()
         {
+            IsBusy = true;
             InEditMode = true;
             BackupUser = ThisUser.GetCopy();
             PageName = SetPageName();
+            IsBusy = false;
         }
 
         [RelayCommand]
         public async void DeactivateEditMode()
         {
+            IsBusy = true;
             if (IsNewUser)
             {
                 await Shell.Current.Navigation.PopAsync();
@@ -107,18 +114,20 @@ namespace GuildMeetOrganizer.ViewModels
                 BackupUser = null;
                 PageName = SetPageName();
             }
+            IsBusy = false;
         }
 
         [RelayCommand]
         public async void SaveUser()
         {
+            IsBusy = true;
             InEditMode = false;
             ApiResponseObject<User> response = null;
             if (IsNewUser)
             {
                 if (ThisUser.Password != CheckPassword)
                 {
-                    //Fehler Passort stimmt nicht
+                    //Fehler Passwort stimmt nicht
                     InEditMode = true;
                     return;
                 }
@@ -137,6 +146,7 @@ namespace GuildMeetOrganizer.ViewModels
                 // Fehler beim Speichern
                 InEditMode = true;
             }
+            IsBusy = false;
         }
     }
 }

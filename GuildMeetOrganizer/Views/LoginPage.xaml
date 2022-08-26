@@ -10,7 +10,7 @@
     <Grid RowDefinitions="*,2*,Auto">
         <ActivityIndicator
             Grid.RowSpan="3"
-            IsRunning="{Binding IsLoading}"
+            IsRunning="{Binding IsBusy}"
             WidthRequest="100"
             ZIndex="10" />
         <VerticalStackLayout

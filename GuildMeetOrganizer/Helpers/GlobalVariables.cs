@@ -16,7 +16,7 @@ namespace GuildMeetOrganizer.Helpers
             get
             {
                 return _loggedInUser;
-            } 
+            }
             set
             {
                 if (_loggedInUser != value)
@@ -26,5 +26,6 @@ namespace GuildMeetOrganizer.Helpers
                 }
             }
         }
+        public static string ApiToken { get; set; }
     }
 }

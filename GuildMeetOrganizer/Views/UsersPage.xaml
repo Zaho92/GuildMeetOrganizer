@@ -77,6 +77,7 @@
         </ScrollView>
         <Button
             Grid.Row="2"
+            Margin="0,15"
             Command="{Binding AddUserCommand}"
             Text="Neuen Benutzer anlegen"
             VerticalOptions="End" />

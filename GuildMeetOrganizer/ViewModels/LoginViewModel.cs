@@ -24,10 +24,10 @@ namespace GuildMeetOrganizer.ViewModels
         public string _errorMessage;
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsControlsEnabled))]
-        public bool _isLoading;
+        public bool _isBusy;
 
         public bool HasError => !String.IsNullOrEmpty(ErrorMessage);
-        public bool IsControlsEnabled => !IsLoading;
+        public bool IsControlsEnabled => !IsBusy;
 
         public LoginViewModel()
         {
@@ -37,49 +37,45 @@ namespace GuildMeetOrganizer.ViewModels
         [RelayCommand]
         public async void TryLogin()
         {
-            IsLoading = true;
+            IsBusy = true;
             ErrorMessage = "";
             if (String.IsNullOrWhiteSpace(Username) || String.IsNullOrWhiteSpace(Password))
             {
                 ErrorMessage += String.IsNullOrWhiteSpace(Username) ? "Benutzername" : "";
                 ErrorMessage += String.IsNullOrWhiteSpace(Password) ? ((String.IsNullOrWhiteSpace(Username) ? " und " : "") + "Passwort") : "";
                 ErrorMessage += (String.IsNullOrWhiteSpace(Password) && (String.IsNullOrWhiteSpace(Username)) ? " sind " : " ist ") + "leer.";
-                IsLoading = false;
+                IsBusy = false;
                 return;
             }
 
-            UserDataController userData = new UserDataController();
-            var response = userData.LoginUser(Username, Password);
+            AuthenticateController authenticate = new AuthenticateController();
+            var response = await authenticate.LoginUserAsync(Username, Password);
             if (response.HasError)
             {
                 ErrorMessage += response.ErrorMessage;
-                IsLoading = false;
-                return;
             }
             else
             {
-                GlobalVariables.LoggedInUser = response.Response;
+                await Shell.Current.GoToAsync($"//{nameof(UsersPage)}");
             }
-
-            await Shell.Current.GoToAsync($"//{nameof(UsersPage)}");
-            IsLoading = false;
+            IsBusy = false;
         }
 
         [RelayCommand]
         public async void NavigateLostPasswordPage()
         {
-            IsLoading = true;
+            IsBusy = true;
             await Shell.Current.GoToAsync($"//{nameof(UsersPage)}");
-            IsLoading = false;
+            IsBusy = false;
         }
 
 
         [RelayCommand]
         public async void NavigateRegisterUserPage()
         {
-            IsLoading = true;
+            IsBusy = true;
             await Shell.Current.GoToAsync($"//{nameof(UsersPage)}");
-            IsLoading = false;
+            IsBusy = false;
         }
     }
 }

@@ -3,6 +3,7 @@ using GuildMeetOrganizer.Models;
 using GuildMeetOrganizer.Models.ApiHelper;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Net.Http.Headers;
 using System.Text;
 using static GuildMeetOrganizer.Models.ApiHelper.ApiUriBuilder;
 
@@ -17,6 +18,7 @@ namespace GuildMeetOrganizer.Controller
         public UserDataController()
         {
             _client = new HttpClient();
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GlobalVariables.ApiToken);
         }
 
         const string GetUsersUrl = "GetUsers";
@@ -32,10 +34,8 @@ namespace GuildMeetOrganizer.Controller
             Uri uri = BuildApiUri(thisApiController, GetUsersUrl);
             try
             {
-                using (HttpResponseMessage responseMessage = await _client.GetAsync(uri).ConfigureAwait(false))
-                    {
-                    responseObject = new ApiResponseObject<List<User>>(responseMessage);
-                }
+                using HttpResponseMessage responseMessage = await _client.GetAsync(uri).ConfigureAwait(false);
+                responseObject = new ApiResponseObject<List<User>>(responseMessage);
             }
             catch (Exception ex)
             {
@@ -60,46 +60,15 @@ namespace GuildMeetOrganizer.Controller
             });
             try
             {
-                using (HttpResponseMessage responseMessage = await _client.GetAsync(uri).ConfigureAwait(false))
-                {
-                    responseObject = new ApiResponseObject<User>(responseMessage);
-                }
+                using HttpResponseMessage responseMessage = await _client.GetAsync(uri).ConfigureAwait(false);
+                responseObject = new ApiResponseObject<User>(responseMessage);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
             return responseObject;
-        }
-
-        const string LoginUserUrl = "LoginUser";
-        public ApiResponseObject<User> LoginUser(string username, string password)
-        {
-            return LoginUserAsync(username, password).Result;
-        }
-
-        public async Task<ApiResponseObject<User>> LoginUserAsync(string username, string password)
-        {
-            if (!ConnectivityChecks.CheckIsInternetConnectedAndWarn()) return null;
-            ApiResponseObject<User> responseObject = null;
-            Uri uri = BuildApiUri(thisApiController, LoginUserUrl, new Dictionary<string, string>()
-            {
-                { nameof(username), username },
-                { nameof(password), password }
-            });
-            try
-            {
-                using (HttpResponseMessage responseMessage = await _client.GetAsync(uri).ConfigureAwait(false))
-                {
-                    responseObject = new ApiResponseObject<User>(responseMessage);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-            return responseObject;
-        }
+        }      
 
         const string AddUserUrl = "AddUser";
         public ApiResponseObject<User> AddUser(User user)

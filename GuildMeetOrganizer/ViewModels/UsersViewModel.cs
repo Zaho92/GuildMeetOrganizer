@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GuildMeetOrganizer.Controller;
 using GuildMeetOrganizer.Models;
+using GuildMeetOrganizer.Models.ApiHelper;
 using GuildMeetOrganizer.Views;
 
 namespace GuildMeetOrganizer.ViewModels

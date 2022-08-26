@@ -14,7 +14,6 @@
         FlyoutItemIsVisible="False"
         Route="LoginPage" />
 
-
     <FlyoutItem Title="Gildentreffen" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             Title="Gildentreffen"

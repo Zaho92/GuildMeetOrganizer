@@ -12,7 +12,8 @@ namespace GuildMeetOrganizer.Models.ApiHelper
         public enum ApiControllers
         {
             User,
-            RightsTemplates
+            RightsTemplates,
+            Authenticate
         }
 
         public static string GetBaseApiPath(ApiControllers forController)
